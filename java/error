@@ -1,0 +1,11 @@
+- 상황 : BoardDAOTest를 JUnit으로 테스트
+  에러메세지 : Failed to load ApplicationContext
+  해결방법
+    . class명에 어노테이션 선언하는 부분에 WebAppConfiguration이라는 어노테이션 추가
+
+- 상황 : 톰캣에서 Modules탭에 path를 '/' 로 바꾸고나서 저장하는 과정에 발생
+  에러메세지 : publish module contexts to separate XML files
+  해결방법
+    . 구글링해보니 Overview탭에 Server Options에
+      Publish module contexts to separate XML files를 체크해제하라고 하는데
+      나는 그냥 서버가 started 되어있어서 stop시키고 했더니 해결

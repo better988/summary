@@ -1,0 +1,14 @@
+@SuppressWarnings
+  . 컴파일시 컴파일 경고를 사용하지 않도록 설정할 수 있다.
+
+@Resource
+  . Autowired와 비슷하지만 Autowired는 타입으로,
+    Resource는 name으로 연결한다는점이 다르다.
+
+
+[entry]
+index -> index.do -> EgovComIndexController.java -> EgovLoginUsr.jsp
+-->com.uat.uia.web.EgovLoginController.java -->
+CONTEXT --> /Rose
+
+uat ; user acceptance testing

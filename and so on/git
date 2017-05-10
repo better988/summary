@@ -1,0 +1,64 @@
+git
+  . 버전관리시스템이다.
+  . 스테이지에 올린 후 커밋하는 절차
+  . 코드의 내용을 바꾸면
+
+SourceTree
+  . working copy : 수정된 파일들의 목록이 표시 되는곳, 나의 작업공간도 말하는듯?
+  . add : working copy에서 index영역으로 파일을 올리는 과정
+  . index 또는 staging area : add된 파일들의 목록
+  . commit : index -> repository
+  . repository : 파일들의 버전목록
+  . revert : 돌아감
+
+  . master : 로컬에서의 최신 commit
+  . origin/master : 원격저장소에서의 최신 commit
+  . fetch : 원격저장소에서 코드를 가져오는데,
+            pull과의 차이점은 병합을 시키지는 않는다.
+  . pull : 원격저장소에 있는 코드를 가져올때 사용하고,
+           작업전에 원격저장소의 상태와 로컬의 상태를 일치시키기 위해서도 사용한다.
+
+              R         <-------------------1. girl의 local storage가 push
+           원격저장소     <-------------------2. man의 local storage가 push
+
+           1. girl이 먼저 push를 했다면
+           2. man이 push를 하는 시점에선 원격저장소의 버전이 man의 로컬저장소 버전보다 한단계
+              높기 때문에 push에러가 난다.
+              이때 man은 push에 앞서 pull을 해야하고, pull을 하면 원격 저장소의 코드를
+              내려받는 동시에 man의 로컬저장소 코드와 자동으로 병합을 해준다.
+              이렇게 되면 man의 source tree 의 push버튼에는 1이 아닌 2가 뜨게되며
+              이 과정을 거친 후 push를 해야한다.
+
+
+  . branches 목록에서 우클릭 - reset current branch to this commit
+    한 후 옵션을 hard로 주면 해당 커밋 지점으로 돌아가면서
+    이 이후의 커밋점들은 다 삭제시키고, working copy도 코드가 바뀐다.
+  . 옵션을 mixed로 이후의 지점들을 삭제시키긴 하지만 현재 코드(working copy)는
+    커밋되지 않은 채 남아있다.
+
+branch
+  . 하나의 작업폴더에서 실험적인 추가작업을 할때 원본에 할 수는 없고
+    그 폴더를 통째로 복사해서 작업을 할 수 있는데 이렇게되면
+    작업이 완료 된 후 원본폴더에 그대로 적용시키는것도 일이다.
+    branch는 마치 같은 폴더를 별도의 폴더처럼 이용 할 수 있게하고
+    작업이 마친 후 적용도 편하게 할 수 있다.
+  . 현재 branch를 옮길때? 선택할때?
+    master branch를 선택한다면
+    master branch로 check out 했다. 라고 말함
+
+branch merge : 병합
+  . merge 당할 branch로 check out 한 후 merge 할 branch위에서
+    우클릭하고 merge한다.
+
+conflict : 충돌
+  . 같은 코드를 수정한 파일들끼리 병합한다면 충돌이 일어나는데
+    충돌이 일어나면 알아서 잘 조율...?한다.
+    stage목록에서 우클릭하고 mark?어쩌고 하는 것으로 충돌을 풀어줌
+
+원격저장소
+  . github
+  . gitlab
+  . yobi
+
+diff도구
+  . beyond compare : 유료

@@ -1,0 +1,63 @@
+- root-context.xml
+  . 스프링프로젝트를 만들때 가장 중요한 파일
+  . 웹 자원과 관련되지 않은 모든 자원의 설정을 위해서 존재함
+    (웹과 관련된 설정은 servlet-context.xml파일에서 설정함)
+  . namespace탭을 이용해 사용가능한 xml태그의 폭을 넓혀주어야 한다
+  .
+
+- servlet-context.xml
+  . MVC관련 설정만을 분리하기 위해서 만들어진 파일
+  . <annotation-driven /> : 클래스에 어노테이션을 이용하여 컨트롤러를 작성할 수 있다는 선언
+  . <context:component-scan base-package=""/> : 해당하는 경로만 조사한다
+
+- log4jdbc-log4j2
+  . MyBatis의 로그를 보다 자세히 볼 수 있다
+  . 사용하기 위한 절차
+    .. log4jdbc-log4j2라이브러리를 pom.xml에서 불러오기(이 책에서는 1.16ver 사용)
+    .. root-context.xml에서 driverClassName변경 : net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    .. root-context.xml에서 url변경 : jdbc:log4jdbc:mysql://127.0.0.1:3306/~~~~~~
+    .. resource폴더안에 log4jdbc.log4j2.properties파일 생성
+        내용 : log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
+    .. resource폴더안에 logback.xml파일 생성
+        내용 : <?xml version="1.0" encoding="UTF-8"?>
+              <configuration>
+              	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+              	<!-- log4jdbc-log4j2 -->
+              	<logger name="jdbc.sqlonly" level="DEBUG"/>
+              	<logger name="jdbc.sqltiming" level ="INFO"/>
+              	<logger name="jdbc.audit" level ="WARN"/>
+              	<logger name="jdbc.resultset" level ="ERROR"/>
+              	<logger name="jdbc.resultsettable" level ="ERROR"/>
+              	<logger name="jdbc.connection" level ="INFO"/>
+              </configuration>
+
+- xml파일에서 bean graph가 안보일때
+  . properties - Spring - Bean Support에서 Add XML Config를 클릭 후 해당 xml파일을 등록
+
+- jsp페이지에서 a태그에서 ?bno=${abc}라는식으로 값을 보내면 컨트롤러에서 @RequestParam("bno") int bno
+  이런식으로 값을 받아서 사용할 수 있다
+  . @RequestParam 은 서블릿에서 request.getParameter("bno") 와 같은 기능인데
+    다른점은 문자열,숫자,날짜 등의 형변환이 가능하다는 점이다
+
+- 버튼을 JQuery로 처리하는 일반적인 방법
+  . button에 class명을 준다 : 보통 class명으로 css나 부트스트랩을 적용시킨다
+  . 스크립트 코드를 작성
+  . 변수하나를 선언해서 폼자체를 담는다
+  . 지정하는 클래스명으로 된 버튼이 클릭되었을때 실행할 메서드를 작성한다
+
+
+- html entity !!
+  . &로 시작해 ;로 끝나는 html 심볼같은거..
+  . &laquo; 라고 작성하면 <<
+  . &raquo; 라고 작성하면 >> 이런식... 엄청많다
+
+- UriComponents 사용법 잘 익혀두기
+  . UriComponents로 쿼리를 만들면 ?까지 붙어나온다..
+
+- 290페이지 script로 페이징처리하는 코드
+
+- applicationContext.xml 만들기
+  . WEB-INF/spring에 new해서 spring bean configuration file을 클릭하고 생성
+
+- sql을 반복해서 사용하는 부분은 sql태그로 따로 빼서 사용하는곳에 include시킬수도 있다.

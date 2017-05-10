@@ -1,0 +1,68 @@
+전자정부 표준 프레임워크
+  . JAVA기반
+  . JSP(HTML5, CSS3, JS, JQUERY, AJAX)
+  . servlet
+  . iBatis, Spring, Hibernate
+
+  . 2009.06 version1.0
+  .
+  .
+  . 2015.07 version3.5 현재는 최종---> JAVA7 이상을 사용해야 한다.
+  . Spring framework4.0 이상을 사용
+  . Eclipse4.3 이상을 사용
+
+  - 공통 컴포넌트
+    . 웹
+    . 모바일
+    . 경량공통컴포넌트
+
+  - 표준프레임워크
+    . 개발환경
+        . 개발도구(Eclipse)의 환경을 알아서 잡아준다.
+        . 배포도구도 내포
+        . 형상관리도 자체적으로
+    . 실행환경 : 8개의 서비스그룹에 39개 서비스
+        . 화면처리 presentation layer
+        . 업무처리 business layer
+        . 데이터처리 data layer
+            . Data Source
+            . Data access - Spring xml
+            . ORM - Hibernate
+            . Transaction - Spring
+        . 연계통합
+        . 배치처리
+        . 모바일화면처리
+        . 모바일 API 실행환경
+        . 공통기반
+            . IOC Container
+            . AOP
+            . Chche
+            . File
+    . 관리환경
+    . 운영환경
+
+    . 전자정부프레임워크의 mysql
+      username : com
+      password : com01
+      database : com
+      port : 3306
+
+- main을 가진 클래스는 App를 붙이자
+- 전자정부프레임워크는 인터페이스명에 모두 service를 붙인다.
+- ServiceImple은 반드시 EgovAbstractServiceImpl 또는 AbstractServiceImpl을 상속하여 작성한다.
+- DAO는 반드시 EgovComAbstractDAO를 상속하여 작성한다.
+
+
+
+web.xml에서
+  filter, filter-mapping
+  spring context에 대한 설정
+  spring web context에 대한 설정
+  default페이지등을 설정한다.
+
+
+- web.xml파일부터본다.
+- config/egovframework/springmvc/dispatcher
+
+
+- 

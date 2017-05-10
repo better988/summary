@@ -1,0 +1,95 @@
+#실행순서
+  . 설치폴더로 이동후 mongod --dbpath "c:\kmj\mongodb
+  . 새로운 cmd창에서 설치폴더로 이동 후 mongo
+
+  * 아니면 mongodb서비스 등록하고 bin폴더 path설정 해주면됨
+
+#명령어
+
+  . use 'name': database 생성
+  . db : 현재 사용중인 database명 확인
+  . show dbs : 내가 만든 database 리스트 확인
+        -최소 한개이상의 document를 추가해야 database리스트에서 확인가능
+  . db.dropDatabase() : database 제거
+        -명령전에 use 데이터베이스명 으로 삭제 할 database를 선택해주어야 한다.
+
+  . show collections : 현재 database의 collection보여줘
+  . db.createCollection('name', [options]) : collection 생성
+  . db.collection_name.drop() : collection 제거
+        -역시 database를 먼저 선택 한 후 제거
+  . db.collection_name.insert({'key':'value'}, {'key':'value'}) : document추가
+        -역시 database를 먼저 선택 한 후 제거
+  . db.collection_name.find() : collection의 document list확인
+  . db.collection_name.remove(criteria, justOne) : document 삭제
+        -criteria : 삭제 기준! {}면 모두삭제,
+          =예를들어 {'author':'gang'}
+
+          *tip : 삭제하기전에 find()로 확인하는 습관하는게 좋다.
+            예를들어
+            find({'author':'gang'}) 해서 확인 후
+            remove({'author':'gang'}) 하기
+  . find할때 깔끔하게 조회하기 : 끝에 .pretty()
+
+  . 비교 연산자
+    예 ) db.article.find({'likes':{$lte : 40}}).pretty()
+
+    $eq	  (equals)                  주어진 값과 일치하는 값
+    $gt	  (greater than)            주어진 값보다 큰 값
+    $gte	(greather than or equals) 주어진 값보다 크거나 같은 값
+    $lt	  (less than)               주어진 값보다 작은 값
+    $lte	(less than or equals)     주어진 값보다 작거나 같은 값
+    $ne	  (not equal)               주어진 값과 일치하지 않는 값
+    $in	                            주어진 배열 안에 속하는 값
+    $nin  (not in)                 	주어빈 배열 안에 속하지 않는 값
+
+  . 논리 연산자
+    예 ) db.books.find({$or:[{'author':'minjun'},{'author':'star'}]}).pretty();
+    종류 or and not nor
+    nor : 주어진 모든 조건이 false일 때 true
+    다른건 대충 알듯?
+
+  . https://velopert.com/479 정규표현식부터 다시 하자.
+    정규표현식부터 공부하러 ㄱㄱ
+
+
+  . $where연산자
+    예 ) db.articles.find( { $where: "this.comments.length == 0" } )
+
+  . $elemMatch연산자
+    db.articles.find( { “comments”: { $elemMatch: { “name”: “Charlie” } } } )
+    comments중 Charlie가 작성한 덧글이 있는 document조회 라는데 모르겠음....
+
+  -projection?
+  . db.books.find({}, {'_id':false, 'author':true});
+    _id는 제외하고 author만 보여줌.
+    _id를 제외한 다른 column?에 false를 줄 경우 error
+
+  . sort({'_id:':1}) : id오름차순
+    sort({'_id:':1}) : id내림차순
+  . limit(3) : 출력개수를 3개로 제한
+  . skip(2) : 2개 스킵하고 그다음부터 출력
+
+  . 자바스크립트 문법으로 mix해서 사용...
+    var showpage = function(page){
+      return db.order.find().sort({"_id":1}).skip((page-1)*2).skip(2);
+    }
+    showpage(2);
+    // 페이지당 2개씩 보여주기.
+
+
+  -update!!!
+
+  . 특정 필드 업데이트하기
+    예) db.order.update({"_id":3}, {$set:{"amount":200}});
+        만약 db.order.update({"_id":2}, {"amount":100});
+        를 사용하면 _id와 amount를 제외한 나머지 필드들은 삭제된다
+
+  . 특정 배열필드에 값을 여러개 추가하고 내림차순으로 정렬
+    예 ) db.people.update({name:"Charlie"}, {$push:{skills:{$each:["c++","java"], $sort:-1}}});
+
+
+
+
+Monk로 node.js와 mongodb연결하기
+
+  . 일단 npm인스톨

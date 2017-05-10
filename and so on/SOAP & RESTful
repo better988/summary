@@ -1,0 +1,74 @@
+[SOAP기반 웹 서비스]
+
+  - SOA ; Service Oriented Architecture
+    .해당서비스를 서로 조합해서 업무 기능을 구현한 어플리케이션을 만들어내는 아키텍쳐
+     SOA에서 DATA는 XML로 표현된다.
+
+  - UDDI ; Universal Description, Discovery and Integration
+    . 웹서비스를 등록하고 검색하기위한 저장소로 웹서비스를 공적으로 접근,
+      검색이 가능하도록 한 공개된 레지스트리이다.
+
+  - WSDL ; Web Service Description Language ; 웹서비스 기술언어로서 XML로 기술된다.
+
+  - SOAP
+    . HTTP, HTTPS, SMTP등을 통해서 XMl기반의 메시지를 컴퓨터 네트웍상에서 교환하는 프로토콜.
+
+  - SOAP기반의 웹서비스
+    . 장점 : 동적바인딩이 가능, 독립된 모듈, 서비스연결이 느슨하게 연결, 서비스 조립가능, 플랫폼 무관
+    . 단점 : HTTP상에서 전송하기에 무겁다, 개발난이도가 높다.
+
+
+[RESTful 기반 웹서비스]
+
+  - Roy Fielding이 박사학위 논문에서 웹 아키텍쳐가 웹의 본래 설계의 우수성을 활용하지 못하므로,
+    웹의 장점을 최대한 활용할 수 있는 네트워크 기반의 아키텍쳐를 제안
+
+  # RESTful(Representational State Transfer, 2000년)
+    . HTTP프로토콜로 데이터를 전달하는 프레임워크
+    . 클라이언트와 서버간의 구성요소를 엄격하게 분리하여 구현을 단순화 함
+    . 서버와 클라이언트를 독립적으로 구현함으로 확장성을 향상
+
+    . 핵심은 Web에 개방된 리소스 이용
+    . REST는 웹에 개방된 리소스들을 원격에서 또는 로컬에서 쉽게 이용할 수 있는 웹 응용을 정착
+    . REST 아키텍처 스타일에 따라 정의되고 이용되는 서비스나 응용프로그램을 RESTful 웹 서비스라고 부른다.
+
+
+  * SOA ; Service Oriented Architecture ; 서비스 지향 아키텍쳐
+    . SOAP기반의 웹서비스는 SOA 구조에 따라서 UDDI 레지스트리를 통해서 웹서비스를 등록하고, 탐색하고 바인딩해서 이용
+    . 상호 통신간 프로그램들이 잘 이해할 수 있는 문법에따라 개발되었고, 그에 따라서 개발자들은
+      웹서비스의 기본 스펙을 알아야 하는 고난이도 프로그래밍 능력이 요구됨
+      -->즉, 개발이 어렵다.
+    . 사람보다는 기계가 이해하기 쉬운 구조
+
+   ┌ㅡㅡㅡㅡㅡㅡ┐         find          ┌ㅡㅡㅡㅡㅡㅡ┐
+   |          │ <ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ │ Service  │
+   | UDDI     │ ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ> │ requester│
+   |          │       WSDL로 반환      └ㅡㅡㅡㅡㅡㅡ┘
+   │          │                          ∧   │  HTTP를 이용한 SOAP방식으로
+   │          │                          │   ∨  Binding한다.
+   │ register │         WSDL          ┌ㅡㅡㅡㅡㅡㅡ┐
+   │          │ <ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ │ Service  │
+   └ㅡㅡㅡㅡㅡㅡ┘ ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ> │ Provider │
+                        WSDL          └ㅡㅡㅡㅡㅡㅡ┘
+
+
+  * ROA ; Resource Oriented Architecture ; 자원 지향 아키텍쳐
+    . RESTful 웹서비스는 리소스를 등록하고 저장하는 중간매개채(UDDI같은) 없이
+      리소스 제공자가 요청자에게 직접 리소스를 제공
+    . 인터넷 서비스 업체들이 응용 개발자들에 손쉬운 데이터 제공을 목적으로 출발함
+    . 기계보다는 사람이 이해하기 쉽도록 인터넷 기본(HTTP/XML)이외에 별도의 개발/실행 환경이 필요 없음
+
+   ┌ㅡㅡㅡㅡㅡㅡ┐       request         ┌ㅡㅡㅡㅡㅡㅡ┐
+   | Resource │ <ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ │ Resource │
+   | provider │ ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ> │ requester│
+   └ㅡㅡㅡㅡㅡㅡ┘       Resource        └ㅡㅡㅡㅡㅡㅡ┘
+
+
+- 값을 반환하면 기본적으로 content-type이 text/html이고
+- 객체를 반환해서 JSON형태로 보려면 Jackson을 설치해야한다.
+  형태는 application/json
+
+
+
+- ?????????????????????????????
+  . chrome에서 Advanced REST client 설치

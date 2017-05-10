@@ -1,0 +1,102 @@
+cookie
+  . cookie 암호화 방법
+    - app.use(cookieParser('lsakdjflksajfklsjadlkfja@#@!#'));
+      cookieParser값에 아무값이나 써준다.
+
+    - req.cookies 부분을 req.signedCookies 로 바꾼다.
+
+    - res.cookie('count', count, {signed:true}); 처럼
+      마지막 인자에 {singed:true} 값을 준다.
+
+session
+  . 사용자가 서버에 접속을하면 사용자의 컴퓨터에 쿠키방식으로 데이터를 저장하는데
+    이때 저장하는데이터는 사용자의 식별자인 id값만 저장한다.
+    실제 데이터는 서버에 저장되어있고
+    사용자가 서버에접속했을대 요청으로 식별자를 전송하면 식별자에 해당하는 실제 데이터를
+    데이터베이스나 파일이나 메모리에서 읽어온다.
+
+  . 사용법
+    npm install express-session --save        // data를 memory에 저장하기때문에 개발하긴 좋으나 실제서비스는X
+    require한다.
+    - app.use(session({
+      secret: 'randomvalue!@#!@#EQWEQEweqw',  // cookie-parser쓸때처럼 아무값이나 넣어준다.
+      resave: false,                          // session ID를 새로 접속할때까지 발급하지마라
+      saveUninitialized: true                 // session ID를 세션을 실제 사용할때까지 발급하지마라
+      }));
+
+  . 로그아웃
+    delete 키워드로 session data를 삭제하면됌
+    delete req.session.username
+
+  . save
+    세션값이 완전히 세팅이 끝나면 save 안쪽에 있는 함수가 실행되도록 약속되어있다.
+    안전하게 세션을 처리하기위함.
+
+session-file-store
+  . 세션데이터를 파일로 저장할수있게 해주는 모듈
+    npm install session-file-store
+    https://www.npmjs.com/package/session-file-store
+
+pbkdf2
+  . npm install pbkdf2-password
+
+  . hasher({password : value}, function(err, pass, salt, hash){
+      pass : password 본래값
+      salt : salt값
+      hash : salt와 조합해 만든 hash값
+      으로 가지고 조작하면되고
+    });
+
+  . 찾아올때는 다똑같은데
+    hasher({password : value , salt:value}, function........)
+    여기서 salt값만 저장해둔 값을 가져오고 비밀번호를 똑같이 쓰면 같은 hash값이 나오니. 이렇게 인증
+
+passport
+  . var passport = require('passport')
+    var LocalStrategy = require('passport-local').Strategy;
+
+  . app.use(passport.initialize());   // passport를 초기화하고 passport를 사용하도록 use함.
+    app.use(passport.session());      // passport를 이용해서 인증할때 session을 사용하겠다.
+                                      // session세팅 아래코드에 위치해야함.
+
+  . 구글, 페이스북.. 아니면 로컬(개별 id/pw를 이용해 로그인하는방식)이라던지.. 이런 방식을
+    passport에서는 Strategy 즉, 전략 이라고함.
+
+  . ★중요!! 사용자의 아이디를 입력하는 폼의 이름은 반드시 username으로 해야한다. ** 바꾸는 방법 있었음
+    다른것으로 하면 passport가 id값을 못찾는다.
+    비밀번호도 반드시 password로 해야한다.
+
+  . app.post('/login',
+    passport.authenticate('local', { successRedirect: '/',      //인증에 성공하면 리다이렉트 시키는 코드
+                                   failureRedirect: '/login',   //실패하면 가는 코드
+                                   failureFlash: true })        //
+    );                             // failureFlash : false로 해준다. 중요하진 않지만 궁금하면 공부!
+    이 코드를보면 login으로 들어오는 부분을 가로채는 라우터 인데
+    이 안엥서 passport의 함수를 호출하는데 이런것을 middleware라고 한다.
+    쉽게말해
+    post방식으로 /login에 들어오면 콜백함수가 실행되는데 이 콜백함수에는
+    인증과 관련된 코드가 정의되어있다. 라고 생각하면됌
+
+federation
+  . facebook
+    - facebook developer 페이지에 들어가서 등록
+    - 전략등록
+
+
+
+
+session을 database에 저장하는 이유?
+  . session정보
+    - session id : 높은수준의 무작위생성 / 이 값은 기본값 5분마다 새로생성된다.
+    - user IP주소
+    - 사용자의 User Agent 정보
+    - 마지막행동(last Activity)에 대한 시간값(time stamp)
+
+  . 장점
+    - 세션을 db에 저장하게 되면 웹서버가 여러대일 경우 세션을 유지할 수 있다.
+    - 문제가 생겼을때 database의 내용을 보면서 문제해결이 가능하다.
+    - 현재 접속자수(로그인, 비로그인)를 알기 쉽다.
+    - 각 세션마다 유일한 세션아이디(session id)를 갖는다.
+
+  . 단점
+    - 서버 리소스문제

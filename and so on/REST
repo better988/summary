@@ -1,0 +1,11 @@
+Representational State Transfer
+서버와 클라이언트 사이의 데이터교환을 할때 표준 http 프로토콜을 이용하는 것.
+
+장점
+  . 전송되는 데이터가 주로 JSON이나 XML형식이라 사람이 이해할 수 있다.
+  . 브라우저가 없는 컴퓨터도 없고, 설사 없다해도 http protocol을 지원하지 않는경우는 거의 없다.
+  . 쉬워서 많이쓰인다. 웹표준이라고 봐도 무방.
+
+RESTful
+REST는 기술이고, RESTful은 이 기술을 사용하는 방법? 매너? 약속같은것
+이런 약속에 대해 정리되어있는 곳 http://blog.naver.com/fltltmxjs/80199970172

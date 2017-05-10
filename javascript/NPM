@@ -1,0 +1,65 @@
+패키지매니저임.
+앱스토어같은느낌의..
+
+** 설치하는것은 공통적으로 npm install 패키지명 써주고
+뒤에 -g : global : 어디에서도 실행시킬수 있게 전역적으로 설치
+뒤에 -save : 이 모듈에서 잠깐 쓰고 말꺼면 -save를 쓰지말고
+계속 쓸거면 -save를 써준다.
+-save를 써주면 package.json에 dependencies항목에
+해당 모듈이 추가되서 계속 쓸 수 있게됨.
+
+fs : 파일시스템을 제어하는 nodejs의 기본모듈
+  . var fs = require('fs'); 코드로 사용할 수 있다.
+
+uglify-js
+  . uglifyjs [filename] 공백등을없앤다.
+  . uglifyjs [filename] -m 바꿔도되는 변수명까지 바꿈
+  . uglifyjs [filename] -o [savename] savename으로 저장한다.
+    -보통 filename.min.js 이런식으로 minimize되었다는 의미로 저장
+
+underscore
+  . 현재 나의 디렉토리 자체를 npm의 패키지로 지정해주어야 한다.
+    - npm상에서 현재의 디렉토리를 패키지로 지정하기위한 명령
+      npm init치고 description만 대충 써주고 yes누르면
+      지정해준 폴더에 package.json파일이 생성된다.
+    - 여기까지하면 다른사람이 만든것을 내 프로젝트에 포함시킬 준비가 된것임.
+    - npm install underscore --save
+
+express
+  . 사용법 app.js파일 참고
+
+jade : html코드들을 간단한 코드로 사용할 수 있게 해줌.
+  . app.set('view engine', 'jade');
+    express와 jade를 연결하는 코드.
+
+  . app.locals.pretty = true;
+    html코드가 자동으로 줄바꿈되게 해주는..
+
+body-parser : express에서 Post방식을 사용할 수 있게 해줌. MiddleWare
+  . get방식은 express에서 기본으로 제공하지만 post방식을 사용하기위해선
+    body-parser를 연결해주어야 한다.
+
+  . 인스톨 후
+    var bodyParser = require('body-parser');
+    와
+    app.use(bodyParser.urlencoded({ extended: false }));
+    를 삽입해주어야 한다.
+
+supervisor
+  . 서버를 매번 껏다켜지않아도 watch기능을 통해 알아서 서버를 다시 껐다 켜주는...
+
+orientDB
+  . npm install orientjs --save
+  . orientDB에 대한 js파일을 만든다. (여기서는 database_orientdb.js)
+
+multer
+  . npm install multer
+
+
+** process for make application
+
+1. express를 얻어오는 코드작성
+2. listen하는 코드작성
+3. 템플릿을 저장할 폴더 생성(form파일 같은)
+  .뷰들을 해당 폴더에 저장하겠다는 코드작성
+  .뷰를 작성할때 사용할 템플릿 엔진을 지정해주는 코드작성

@@ -1,0 +1,44 @@
+alert(''); 경고창
+console.log(''); 콘솔에 로그
+Math.pow(3,2); 3의제곱
+Math.round(10.6); 10.6반올림해서 11
+Math.ceil(10.2); 10.2올림해서 11
+Math.floor(10.2); 10.2내림해서 10
+Math.sqrt(9); 9의 제곱근해서 3
+Math.random(); 1보다 작은 임의의수
+기호를 그대로 표시하고 싶으면 \
+typeof 데이터 타입을 반환
+"code".indexOf("o"); 1을 반환
+
+== euqal operator
+=== strict equal operator
+1 == "1" --> true
+1 === "1" --> false
+ ** ===는 값과 데이터의 형식이 정확하게 일치할때만 true
+!==는 정확하게 다르냐
+
+null 없다. 프로그래머의 의도로 값을 넣지않음
+undefined 정의되지않았다. 의도가 아님.
+
+자바스크립트에서 숫자1은 true를 의미.
+ but strict equal operator로 비교하면 false임.
+1은 number 타입이고 true는 boolean타입이기 때문.
+
+참고로 NaN === NaN 은 false
+
+
+document.write();
+uppercase();
+
+-array-
+.push : 값을 추가
+.concat : 원래배열에 배열값을 추가해서 다시 그 추가한 배열값을 리턴
+.unshift : 값을 배열 맨 앞에 넣는다
+.splice
+
+
+.원시데이터 타입 : String, Number, Boolean, null, undefined
+  : var a = 1; var b = a; 라고 했을때 복제가 일어나서 각각 다른 값을 가리킨다.
+원시데이터 타입이아닌 객체타입의 경우 서로 참조의 형태이다.
+
+setTimeout(function(){}, 3000); 3초후에 함수실행

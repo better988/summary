@@ -1,0 +1,23 @@
+. Mongoose: mpromise (mongoose’s default promise library) is deprecated,
+  plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
+
+  mongoose v4 이상의 버전부터 mongoose의 save()와 쿼리같은 비동기 동작에서는
+  Promises/A+ conformant pomises를 반환하게 되어있다.
+  위와 같은 메세지가 보인다면,
+  mongoose.Promise = global.Promise;
+  위의 코드를 require(‘mongoose’) 아래에 넣어주자.
+
+
+. css파일을 링크시키기 위해선
+  app.use(express.static('css')); 를 입력해주어야 한다.
+  정적파일이기때문..
+
+. 라우터에서 res.sendfile() 사용하면 deprecated 에러가남.
+  res.sendFile() 을 사용해야 하는데 사용방법이 다름.
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(path.join(,'폴더경로', '렌더링할 파일명'));
+  **__dirname은 그냥 변수를 써주는데 여기에는 현재 프로젝트폴더의 경로가 반환된다.
+
+. javascript에서
+  변수에 JSON형식으로 객체를 선언했을때 개수구하기
+  Object.keys(객체).length 하면 key의 개수를 반환한다.

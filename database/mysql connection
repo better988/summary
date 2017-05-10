@@ -1,0 +1,79 @@
+** eclipse설정
+  . bulidpath - java compiler 1.8로
+  . project facets 에서 java 1.8로
+
+-mysql command line client에서 status
+  .현재상태
+
+  . dependency추가
+      .mysql-connector-java : 5.1.40
+      .mybatis  3.2.8
+      .mybatis-spring   1.2.2
+      .spring-jdbc    스프링 버전과 똑같이 사용한다.
+      .spring-test
+
+  . context.xml설정
+      . servlet-context.xml파일은 웹에관한 설정
+      . root-context.xml은 웹 이외의 설정
+
+  . root-context.xml의 namespace설정
+      . aop, beans, context, jdbc, mybatis-spring선택
+      . source로 돌아가서 dataSource 빈설정
+
+
+  . root-context.xml의 sqlSessionFactory 빈설정
+
+  . resource에 mybatis-config.xml파일 생성/작성
+
+  . slf4j logger
+
+
+- 멤버테이블 생성과 연동
+  . 테이블 생성
+  . mapper.xml생성
+    . dtd
+    . namespace : 찾아서 실행하는 곳 지정
+
+  . memberDAOImpl.java 생성/작성
+  . root-context.xml에서 스캔할 수 있도록
+    context:component-scan을 작성
+
+
+- mapper.xml에 namespace를 지정하는 다른 방법
+
+- log4jdbc 사용하기
+  . pom.xml에 추가
+  . root-context.xml에 datasource 속성변경(driverClassName, url)
+  . properties파일 생성
+  . logback.xml파일 생성
+
+
+** spring board bootstrap project process
+
+  . create table
+  . create header, footer
+  . create vo
+  . create dao
+  . create mapper
+      - namespace = "interface"
+      - #{} value is case-sensitive.
+
+  . create BbsDAOImpl
+  . junit test
+
+  . bbsMapper.xml에 resultType을 aliasType으로 지정하는법
+      - mybatis-config.xml에 파일에 작성한다.
+
+  tip) root-context.xml에 스캔하는 코드를 넣어줘야
+       해당 패키지에서 inject를 사용할 수 있다.
+
+  . controller작성
+
+  tip) url에 정보를 남기지 않기 위해 RedirectAttributes를 사용
+
+- @RequestParam : Servlet에서 request.getParameter()과 유사한 기능
+    . servlet의 request는 HttpServletRequest이다.
+    . @RequestParam과 HttpServletRequest의 차이점
+
+- addAttribute에서 key값을 지정해주지 않을 경우, key는
+  클래스의 이름을 자동으로 소문자로 시작해서 저장된다.

@@ -1,0 +1,9 @@
+1.  root-context에서 driverClassName을 net.sf.log4jdbc.sql.jdbcapi.DriverSpy로 했는데
+    왜자꾸 JUnit으로 DataSource 테스트하면
+    Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'.
+    The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+    라고 빨간 로그가 뜨는지 모르겠다..
+
+2. TimeStamp와 Date는 차이점은 뭘까?
+
+3. 변수선언 시 int와 Integer의 차이점은 뭘까?
